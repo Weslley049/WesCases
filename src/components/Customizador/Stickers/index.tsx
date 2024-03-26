@@ -46,8 +46,6 @@ const StickersContainer = forwardRef<StickersContinerHandler,StickerContainerInt
     },[])
 
 
-   
-
     const onSelectSticker = (imagePath: string) => {
         onClickSticker(imagePath)
 
