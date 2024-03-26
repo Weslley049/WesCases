@@ -29,7 +29,7 @@ export const Home = () => {
                 {casesArray.map((casePath, index) => (
                     <S.CaseBox key={index}>
                         <CaseComponent 
-                            srcPath={casePath} 
+                            srcPath={`../../${casePath}`} 
                             alt={`case ${index} + 1`} 
                             imageStyle={{
                                 height: '300px',

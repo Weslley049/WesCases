@@ -169,7 +169,7 @@ export const UseCustomizador = () => {
     } 
 
     const onAddStickers = (imagePath: string) => {
-      fabric.Image.fromURL(imagePath, function(oImg) {
+      fabric.Image.fromURL(`../../${imagePath}`, function(oImg) {
       
 
         editor?.canvas.add(oImg);
@@ -181,8 +181,7 @@ export const UseCustomizador = () => {
 
     const AddBackgroundImage = useCallback((path: string) => {
         
-        fabric.Image.fromURL(path, function(oImg) {
-       
+        fabric.Image.fromURL(`../../${path}`, function(oImg) {
           editor?.canvas.setBackgroundImage(oImg, editor?.canvas.renderAll.bind(editor?.canvas), {
             scaleX: 1718 / (oImg as any)?.width,
             scaleY: 827 / (oImg as any)?.height,

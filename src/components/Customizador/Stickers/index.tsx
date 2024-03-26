@@ -7,6 +7,8 @@ import * as S from './styles'
 import Text from "../../Core/Text";
 import { DynamicImage } from "../../DynamicImage";
 
+
+
 export interface StickersContinerHandler {
     hiddenModal: () => void
 	showModal: () => void
@@ -43,6 +45,7 @@ const StickersContainer = forwardRef<StickersContinerHandler,StickerContainerInt
         return Array.from({ length: 8 }, (_, index) => `stickers/sticker${String(index + 1)}.png`);
     },[])
 
+
    
 
     const onSelectSticker = (imagePath: string) => {
@@ -72,7 +75,7 @@ const StickersContainer = forwardRef<StickersContinerHandler,StickerContainerInt
                             <ButtonBase key={index} onClick={() => onSelectSticker(imagePath)} style={{
                                 margin: 10,
                             }}>
-                                <DynamicImage srcPath={imagePath} alt={`Imagem ${index + 1}`} imageStyle={{
+                                <DynamicImage srcPath={`../../../${imagePath}`} alt={`Imagem ${index + 1}`} imageStyle={{
                                     height: 60,
                                     width: 60
                                 }}>
