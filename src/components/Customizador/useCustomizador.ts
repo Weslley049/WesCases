@@ -181,7 +181,7 @@ export const UseCustomizador = () => {
 
     const AddBackgroundImage = useCallback((path: string) => {
         
-        fabric.Image.fromURL(`../../../public/${path}`, function(oImg) {
+        fabric.Image.fromURL(path, function(oImg) {
        
           editor?.canvas.setBackgroundImage(oImg, editor?.canvas.renderAll.bind(editor?.canvas), {
             scaleX: 1718 / (oImg as any)?.width,

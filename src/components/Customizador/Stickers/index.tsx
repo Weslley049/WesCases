@@ -40,7 +40,7 @@ const StickersContainer = forwardRef<StickersContinerHandler,StickerContainerInt
 
 
     const imagesArray = useMemo(() => {
-        return Array.from({ length: 8 }, (_, index) => `../../../../public/stickers/sticker${String(index + 1)}.png`);
+        return Array.from({ length: 8 }, (_, index) => `stickers/sticker${String(index + 1)}.png`);
     },[])
 
    

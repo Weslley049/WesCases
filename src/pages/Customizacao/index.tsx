@@ -23,9 +23,6 @@ export const Customizacao = () => {
     },[paramValue])
    
 
- 
-   
-
     
     return (
         <S.CustomizadorContainer>
