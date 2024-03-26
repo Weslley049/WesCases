@@ -10,6 +10,7 @@ import CaseComponent from "../../components/CaseComponent";
 export const Home = () => {
     
 
+
     const casesArray = useMemo(() => {
         return Array.from({ length: 7 }, () => `cases/case1.png`);
     },[])
@@ -22,7 +23,8 @@ export const Home = () => {
 
         <S.Body>
             <Text $scale={18} $bold style={{
-                color: 'var(--gray-800)'
+                color: 'var(--gray-800)',
+                marginBottom: 10
             }}> Selecione o case de sua preferência e comece a personaliza-lo</Text> 
 
             <S.CasesList>
@@ -31,10 +33,7 @@ export const Home = () => {
                         <CaseComponent 
                             srcPath={`../../${casePath}`} 
                             alt={`case ${index} + 1`} 
-                            imageStyle={{
-                                height: '300px',
-                                width: '300px',
-                            }}
+                          
                             label="Iphone 15 Pro Max"
                             customizable
         

@@ -2,6 +2,8 @@ import Text from '../Core/Text';
 import * as S from './styles'
 
 const Header = () => {
+    
+   
     return(
         <S.Main>
             <Text $scale={22} $bold style={{

@@ -21,7 +21,13 @@ export const DialogBody = styled(DialogContent)`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 30px;
-    max-width: 60vw;  
+    max-height: 60vh;
+    overflow: auto; 
+   
+
+     @media (max-width: 430px) {
+          grid-template-columns: repeat(2, 1fr);
+    }
 
 `;
 

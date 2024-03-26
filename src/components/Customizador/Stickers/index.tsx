@@ -61,10 +61,12 @@ const StickersContainer = forwardRef<StickersContinerHandler,StickerContainerInt
                     <S.DialogHeader>
                         <Text $scale={16} style={{
                             color: 'white'
-                        }}> Escolha seu sticker </Text>
+                        }}> Escolha o sticker </Text>
 
                         <ButtonBase>
-                            <IoIosCloseCircleOutline color="white" size={26} onClick={hiddenModal}/>
+                            <IoIosCloseCircleOutline style={{
+                                marginLeft: 10,
+                            }} color="white" size={26} onClick={hiddenModal}/>
                         </ButtonBase>
                     
                     </S.DialogHeader>

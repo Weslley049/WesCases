@@ -3,6 +3,8 @@ import { forwardRef, useImperativeHandle, useState } from "react";
 import * as S from './styles'
 import {Button, ButtonBase } from "@mui/material";
 
+import { IoIosCheckmarkCircle } from "react-icons/io";
+
 import options from './utils';
 
 
@@ -29,16 +31,26 @@ const TextEditor = forwardRef<TextEditorHandler,TextEditorInterface>((props,ref)
     
     const [open, setOpen] = useState(false);
 
-    const [object, setObject] = useState();
+    const [selectedFontFamily, setSelectedFontFamily] = useState(0);
+
+
+    const [object, setObject] = useState(null);
 
     const [text, setText] = useState('');
 
     const [textStyle, setTextStyle] = useState({
-        fontFamily: 'sans-serif',
-        color: 'white',
+        fontFamily: options.font[0][1],
+        color:  options.color[0][0],
     })
 
   
+    const handleSelectedFont = () => {
+        if(selectedFontFamily + 1 > options.font.length - 1){
+            return setSelectedFontFamily(0)
+        }
+
+        return setSelectedFontFamily(selectedFontFamily + 1)
+    }
 
     const returnText = () => {
         return {
@@ -64,10 +76,22 @@ const TextEditor = forwardRef<TextEditorHandler,TextEditorInterface>((props,ref)
         setObject(object);
         setText(text);
         setTextStyle(textStyle);
+
+        const fontIndex = options.font.findIndex(([key, value]) => value === textStyle.fontFamily )   
+
+
+        setSelectedFontFamily(fontIndex || 0);
     }
 
     const handleClose = () => {
+    
+        handleReset(null, '', {
+            fontFamily: options.font[0][1],
+            color:  options.color[0][0],
+        } );
+
         setOpen(false)
+
     }
 
     const handleOpen = () => {
@@ -101,39 +125,55 @@ const TextEditor = forwardRef<TextEditorHandler,TextEditorInterface>((props,ref)
                 backgroundColor: 'transparent'
             }
         }}>
-            <S.DialogMain>
-                <S.DialogBody>
-                        <S.DialogSideBar>
-                                {options.color.map(([_, value], index) => (
-                                    <ButtonBase key={index} onClick={() => handleChangeTextStyle('color', value)}>
-                                        <S.ColorBox color={value}/>
-                                    </ButtonBase>
+            <S.DialogMainFonts>
+                            <ButtonBase onClick={() => {
+                                handleSelectedFont();
+                                handleChangeTextStyle('fontFamily', 
                                 
-                                ))}
-                        </S.DialogSideBar>
+                                selectedFontFamily + 1 > options.font.length - 1 ? options.font[0][1] : 
+                                options.font[selectedFontFamily + 1][1]
+                                )
+                            }}>
+                                <S.FontBox fontFamily={textStyle.fontFamily}> 
+                                    {options.font[selectedFontFamily][0]} 
+                                </S.FontBox>    
+                            </ButtonBase>
 
+                </S.DialogMainFonts>
 
-                    <input value={text} onChange={(e) => handleChangeText(e.target.value)} placeholder="Digite algo..." style={
+            <S.DialogMain>
+
+            
+                
+                <S.DialogBody>
+                    <input value={text}  onChange={(e) => handleChangeText(e.target.value)} placeholder="Digite algo..." style={
                         {
                             border: 'none',
                             outline: 'none',
                             background: 'none',
                             ...textStyle,
                         }}/>
-
-                    <S.DialogMainFonts>
-                        {options.font.map(([_, value], index) => (
-                            <ButtonBase key={index} onClick={() => handleChangeTextStyle('fontFamily', value)} >
-                                <S.FontBox fontFamily={value}> 
-                                    Aa  
-                                </S.FontBox>
-                            </ButtonBase>
-                        
-                        ))}
-                    </S.DialogMainFonts>
-
-                    <Button variant='contained' onClick={() => handleConfirm()}> Confirmar </Button>
+  
                 </S.DialogBody>
+
+               
+
+               
+             
+                
+                
+                <S.DialogSideBar>
+                                <ButtonBase onClick={() => handleConfirm()}> 
+                                    <IoIosCheckmarkCircle color="white" size={30}/>
+                                 </ButtonBase>
+                            
+                                {options.color.map(([_, value], index) => (
+                                    <ButtonBase key={index} onClick={() => handleChangeTextStyle('color', value)}>
+                                        <S.ColorBox color={value}/>
+                                    </ButtonBase>
+                                
+                                ))}
+                </S.DialogSideBar>
 
             
 

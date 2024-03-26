@@ -32,7 +32,7 @@ export const UseCustomizador = () => {
      
         }
       
-      },[editor])
+      },[editor, CanvaDialogContainer.current])
 
       editor?.canvas.on('mouse:dblclick', function (event) {
        
@@ -176,7 +176,7 @@ export const UseCustomizador = () => {
       fabric.Image.fromURL(`../../${imagePath}`, function(oImg) {
         const scaleX = (editor as any)?.canvas.getWidth() / (oImg as any).width;
         const scaleY = (editor as any)?.canvas.getHeight() /(oImg as any).height;
-        const scale = Math.max(scaleX, scaleY);
+        const scale = Math.min(scaleX, scaleY);
         
         oImg.set({ 
             left: (editor as any)?.canvas.getWidth() / 2 - ((oImg as any).width * scale) / 2,

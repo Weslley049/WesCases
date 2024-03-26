@@ -12,6 +12,9 @@ export const Main = styled.div`
 
     border-bottom: 1px solid var(--gray-100);
 
+    @media (max-width: 430px) {
+        justify-content: center;
+    }
 `;
 
 export const content = styled.p`
@@ -19,6 +22,11 @@ export const content = styled.p`
     color: var(--white);
     padding: 0.25rem 0 0.25rem 2rem;
     border-left: 1px solid var(--gray-100);
+
+    @media (max-width: 430px) {
+        display: none;
+    }
+   
 `
 
 

@@ -33,6 +33,8 @@ const GlobalStyle = createGlobalStyle`
 			min-height: 100vh;
 			font-size: 1.6rem;
 		}
+
+	
 	`};
 `
 
