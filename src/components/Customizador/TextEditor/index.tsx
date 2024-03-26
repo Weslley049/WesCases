@@ -1,7 +1,7 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
 
 import * as S from './styles'
-import {Button, ButtonBase } from "@mui/material";
+import {ButtonBase } from "@mui/material";
 
 import { IoIosCheckmarkCircle } from "react-icons/io";
 
@@ -77,7 +77,7 @@ const TextEditor = forwardRef<TextEditorHandler,TextEditorInterface>((props,ref)
         setText(text);
         setTextStyle(textStyle);
 
-        const fontIndex = options.font.findIndex(([key, value]) => value === textStyle.fontFamily )   
+        const fontIndex = options.font.findIndex(([_, value]) => value === textStyle.fontFamily )   
 
 
         setSelectedFontFamily(fontIndex || 0);
