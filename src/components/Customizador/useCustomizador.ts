@@ -82,7 +82,10 @@ export const UseCustomizador = () => {
     }
 
     const onAddTriangle = () => {
-      var triangle = new fabric.Triangle();
+      var triangle = new fabric.Triangle({
+        width: 50,
+        height: 50, 
+      });
       editor?.canvas.add(triangle);
       
       AddObjectCanva()
@@ -110,15 +113,6 @@ export const UseCustomizador = () => {
     
       editor?.canvas.add(newText);
       editor?.canvas.setActiveObject(newText);
-
-      // editor?.canvas.on('mouse:down', function (event) {
-      //   // Verifique se o objeto clicado é um objeto de texto
-      //   if (event.target && event.target.type === 'text') {
-      //     console.log('Clicou no texto:', event);
-      //     // Faça algo quando clicar no texto
-      //   }
-      // });
-    
 
 
       AddObjectCanva()
@@ -152,12 +146,16 @@ export const UseCustomizador = () => {
 
 
           image.onload = function () {
+            const scaleX = (editor as any)?.canvas.getWidth() /  image.width;
+            const scaleY = (editor as any)?.canvas.getHeight() / image.height;
+            const scale = Math.min(scaleX, scaleY);
+            
+
             const img = new fabric.Image(image, {
-                height: image.height,
-                width: image.width,
+                left: (editor as any)?.canvas.getWidth() / 2 - ( image.width * scale) / 2,
                 top: 0,
-                left: 0,
-      
+                scaleX: scale,
+                scaleY: scale,
             });
 
             setImageBackground(img);

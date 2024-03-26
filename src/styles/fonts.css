@@ -15,5 +15,23 @@
   }
 
 
+  @font-face {
+    font-family: 'Modak';
+    src: url('../fonts/Modak-Regular.ttf') format('truetype');
+  }
+
+  @font-face {
+    font-family: 'Lora';
+    src: url('../fonts/Lora-VariableFont_wght.ttf') format('truetype');
+  }
+
+  @font-face {
+    font-family: 'JosefinSans';
+    src: url('../fonts/JosefinSans-VariableFont_wght.ttf') format('truetype');
+  }
+
+
+
+
 
 
