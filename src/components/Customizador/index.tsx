@@ -1,7 +1,7 @@
 
 
 import * as S from '../styles';
-import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
 
 import { FabricJSCanvas } from 'fabricjs-react'
 
@@ -21,17 +21,13 @@ import html2canvas from 'html2canvas';
 import  TextEditor from './TextEditor';
 
 export interface CustomizadorHandler {
-  hiddenModal: () => void
-  showModal: () => void
   setCaseBackground: (casePath: string) => void;
-  
-
 }
 
 export interface CustomizadorContainerInterface {}
 
-const Customizador = forwardRef<StickersContinerHandler,CustomizadorContainerInterface>((props,ref) => {
-    const [open, setOpen] = useState(false);
+const Customizador = forwardRef<CustomizadorHandler,CustomizadorContainerInterface>((_,ref) => {
+    
 
   
 
@@ -39,18 +35,9 @@ const Customizador = forwardRef<StickersContinerHandler,CustomizadorContainerInt
 
     const {TextEditorRef, setCaseBackground, CanvaDialogContainer, onReady, ObjectCanvasLength, AddBackgroundImage, onAddStickers, onAddText, onEditText, ...rest } = UseCustomizador();
 
-    const showModal = () => {
-      setOpen(true)
-    }
-
-    const hiddenModal = () => {
-      setOpen(false)
-    }
 
     useImperativeHandle(ref, () => ({
-      hiddenModal,
-      showModal,
-      setCaseBackground,
+      setCaseBackground
     }))
   
   

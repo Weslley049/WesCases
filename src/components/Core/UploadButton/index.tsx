@@ -13,7 +13,7 @@ export const UploadButton = (props: UploadButtonType) => {
     const hiddenFileInput = useRef(null);
   
     const handleClick = () => {
-        hiddenFileInput.current?.click();
+        (hiddenFileInput.current as any)?.click();
       };
 
     const handleChange = (e: any) => {

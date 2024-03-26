@@ -48,11 +48,11 @@ export const UseCustomizador = () => {
         }
       });
 
-      editor?.canvas.on('mouse:move', function (event) {
+      editor?.canvas.on('mouse:move', function () {
         isDragging = true
       });
       
-      editor?.canvas.on('mouse:up', function (event) {
+      editor?.canvas.on('mouse:up', function () {
         isDragging = false;
       });
 

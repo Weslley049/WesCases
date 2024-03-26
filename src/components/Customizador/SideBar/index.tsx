@@ -1,4 +1,4 @@
-import { BsSquareFill, BsCircleFill, BsTriangleFill   } from "react-icons/bs";
+import { BsSquareFill, BsTriangleFill   } from "react-icons/bs";
 import { GoTypography } from "react-icons/go";
 import { PiSmileyStickerThin } from "react-icons/pi";
 

@@ -1,7 +1,7 @@
 import { createGlobalStyle, css } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
-	${({ theme }) => css`
+	${() => css`
 		:root {
 			font-size: 90%;
             --white: #FFF;

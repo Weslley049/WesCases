@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef } from "react";
+import { useMemo } from "react";
 import Text from "../../components/Core/Text";
 import  Header from "../../components/Header"
 
@@ -11,7 +11,7 @@ export const Home = () => {
     
 
     const casesArray = useMemo(() => {
-        return Array.from({ length: 7 }, (_, index) => `cases/case1.png`);
+        return Array.from({ length: 7 }, () => `cases/case1.png`);
     },[])
 
 

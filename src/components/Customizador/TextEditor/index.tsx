@@ -1,7 +1,7 @@
-import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import { forwardRef, useImperativeHandle, useState } from "react";
 
 import * as S from './styles'
-import { Box, Button, ButtonBase, TextField, debounce } from "@mui/material";
+import {Button, ButtonBase } from "@mui/material";
 
 import options from './utils';
 
@@ -122,7 +122,7 @@ const TextEditor = forwardRef<TextEditorHandler,TextEditorInterface>((props,ref)
                         }}/>
 
                     <S.DialogMainFonts>
-                        {options.font.map(([key, value], index) => (
+                        {options.font.map(([_, value], index) => (
                             <ButtonBase key={index} onClick={() => handleChangeTextStyle('fontFamily', value)} >
                                 <S.FontBox fontFamily={value}> 
                                     Aa  
