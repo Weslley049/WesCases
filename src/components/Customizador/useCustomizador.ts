@@ -22,9 +22,13 @@ export const UseCustomizador = () => {
    
       useEffect(() => {
         if(editor){
-        
-          editor.canvas.setWidth((CanvaDialogContainer.current as any)?.clientWidth)
+       
+
+                    
+          editor.canvas.setWidth((CanvaDialogContainer.current as any)?.clientWidth);
           editor.canvas.setHeight((CanvaDialogContainer.current as any)?.clientHeight);
+        
+
      
         }
       
@@ -153,7 +157,7 @@ export const UseCustomizador = () => {
                 width: image.width,
                 top: 0,
                 left: 0,
-            
+      
             });
 
             setImageBackground(img);
@@ -170,7 +174,17 @@ export const UseCustomizador = () => {
 
     const onAddStickers = (imagePath: string) => {
       fabric.Image.fromURL(`../../${imagePath}`, function(oImg) {
-      
+        const scaleX = (editor as any)?.canvas.getWidth() / (oImg as any).width;
+        const scaleY = (editor as any)?.canvas.getHeight() /(oImg as any).height;
+        const scale = Math.max(scaleX, scaleY);
+        
+        oImg.set({ 
+            left: (editor as any)?.canvas.getWidth() / 2 - ((oImg as any).width * scale) / 2,
+            top: 0,
+            scaleX: scale,
+            scaleY: scale,
+           
+        })
 
         editor?.canvas.add(oImg);
       });
@@ -182,12 +196,18 @@ export const UseCustomizador = () => {
     const AddBackgroundImage = useCallback((path: string) => {
         
         fabric.Image.fromURL(`../../${path}`, function(oImg) {
-          editor?.canvas.setBackgroundImage(oImg, editor?.canvas.renderAll.bind(editor?.canvas), {
-            scaleX: 1718 / (oImg as any)?.width,
-            scaleY: 827 / (oImg as any)?.height,
-            originX: 'left',
-            originY: 'top',
-          });
+          const scaleX = (editor as any)?.canvas.getWidth() / (oImg as any).width;
+          const scaleY = (editor as any)?.canvas.getHeight() /(oImg as any).height;
+          const scale = Math.min(scaleX, scaleY);
+          
+          oImg.set({ 
+              left: (editor as any)?.canvas.getWidth() / 2 - ((oImg as any).width * scale) / 2,
+              top: 0,
+              scaleX: scale,
+              scaleY: scale,
+              selectable: false,
+          })
+          editor?.canvas.add(oImg);
         });  
 
        

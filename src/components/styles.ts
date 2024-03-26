@@ -33,6 +33,8 @@ export const DialogSideBar = styled.div`
 `;
 
 export const DialogMain = styled.div`
+    display: flex;
+    justify-content: center;
     height: 100%;
     width: 100%;
 `
