@@ -8,11 +8,11 @@ import CaseComponent from "../../components/CaseComponent";
 
 
 export const Home = () => {
-    const phoneNames = ['Iphone 15 Pro Max', 'Samsung Galaxy 22S']
+    const phoneNames = ['Iphone 15 Pro Max', 'Samsung Galaxy 22S', 'Samsung Galaxy A34']
 
 
     const casesArray = useMemo(() => {
-        return Array.from({ length: 2 }, (_,index) => `cases/case${index + 1}.png`);
+        return Array.from({ length: 3 }, (_,index) => `cases/case${index + 1}.png`);
     },[])
 
 
@@ -32,7 +32,12 @@ export const Home = () => {
                     <S.CaseBox key={index}>
                         <CaseComponent 
                             srcPath={`../../${casePath}`} 
-                            alt={`case ${index} + 1`} 
+                            alt={`case ${index} + 1`}
+                          
+                            imageStyle={{
+                                height: '200px',
+                                width: '200px'
+                            }}
                             label={phoneNames[index]}
                             customizable
         

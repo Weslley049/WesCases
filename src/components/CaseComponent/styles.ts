@@ -7,6 +7,7 @@ export const Main = styled.div`
     justify-content: center;
     align-items: center;
     padding: 10px;
+    width: 100%;
     border:  1px solid var(--gray-100);
     border-radius: 10px;
 `;

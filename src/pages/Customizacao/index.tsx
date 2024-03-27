@@ -16,8 +16,16 @@ export const Customizacao = () => {
     },[searchParams])
 
     useEffect(() => {
+    
+        
         if(paramValue){
-            CustomizadorRef.current.setCaseBackground(paramValue);
+            CustomizadorRef.current.setCaseBackground((old: any) => {
+                return {
+                    ...old,
+                    path: paramValue,
+                  
+                }    
+            });
         }
   
     },[paramValue])

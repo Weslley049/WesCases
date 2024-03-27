@@ -14,22 +14,25 @@ export interface CaseComponentInterface {
     srcPath: string;
     alt: string;
     customizable?: boolean;
+    style?: CSSProperties;
     imageStyle?: CSSProperties;
 
 }
 
-const CaseComponent = ({label, srcPath, alt, customizable, imageStyle}: CaseComponentInterface) => {
+const CaseComponent = ({label, srcPath, alt, customizable, imageStyle, style}: CaseComponentInterface) => {
     return (
         <S.Main>
               <Text $scale={14}> {label} </Text>
 
-              <div>
+              <div style={{
+                width: '100%'
+              }}>
 
             
-              <DynamicImage srcPath={srcPath} alt={alt} height='10%' width='10%'
+              <DynamicImage style={style} srcPath={srcPath} alt={alt}
                      imageStyle={imageStyle || {
-                        height: '300px',
-                        width: '300px',
+                        height: '200px',
+                        width: '200px',
                      }}
                 />
 

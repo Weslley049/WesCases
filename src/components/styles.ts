@@ -35,6 +35,46 @@ export const DialogSideBar = styled.div`
 export const DialogMain = styled.div`
     display: flex;
     justify-content: center;
+    align-items: center;
+    position: relative;
     height: 100%;
     width: 100%;
+
 `
+
+export const MockupContainer = styled.div`
+    height: 54%;
+    width: 17.8%;
+    border-radius: 10%;
+    z-index: 2;
+    overflow: hidden;
+    
+    @media (max-width: 430px) {
+          position: absolute;
+          top: 13.5%;  
+          left: 31.5%;
+          height: 62.5%;
+          width: 39.5%;
+      
+    }
+    
+`;
+
+
+
+export const MockupImg = styled.img`
+    height: 60%;
+    width: 40%;
+    position: absolute;
+    top: 20%;
+    left: 29.5%;
+    z-index: 1;
+
+    @media (max-width: 430px) {
+        height: 70%;
+        width: 90%;
+        top: 10%;
+        left: 5%;
+    }
+
+`;

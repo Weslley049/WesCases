@@ -20,20 +20,21 @@ import { FaCamera } from "react-icons/fa";
 import html2canvas from 'html2canvas';
 import  TextEditor from './TextEditor';
 
+
 export interface CustomizadorHandler {
-  setCaseBackground: (casePath: string) => void;
+  setCaseBackground: (object: any) => void;
 }
 
 export interface CustomizadorContainerInterface {}
 
 const Customizador = forwardRef<CustomizadorHandler,CustomizadorContainerInterface>((_,ref) => {
     
-
+    const BodyRef = useRef(null);
   
 
     const stickersModalRef = useRef<StickersContinerHandler>({} as StickersContinerHandler)
 
-    const {TextEditorRef, setCaseBackground, CanvaDialogContainer, onReady, ObjectCanvasLength, AddBackgroundImage, onAddStickers, onAddText, onEditText, ...rest } = UseCustomizador();
+    const {TextEditorRef, setCaseBackground, CanvaDialogContainer, onReady, ObjectCanvasLength, onAddStickers, onAddText, onEditText, ...rest } = UseCustomizador();
 
 
     useImperativeHandle(ref, () => ({
@@ -46,8 +47,8 @@ const Customizador = forwardRef<CustomizadorHandler,CustomizadorContainerInterfa
     }
 
     const handleCapture = () => {
-      if (CanvaDialogContainer.current) {
-        html2canvas(CanvaDialogContainer.current, { scale: 2 }).then((canvas) => {
+      if (BodyRef.current) {
+        html2canvas(BodyRef.current, { scale: 2 }).then((canvas) => {
           const imgData = canvas.toDataURL('image/jpeg');
           const link = document.createElement('a');
           link.download = 'case_customizado.jpeg';
@@ -79,13 +80,19 @@ const Customizador = forwardRef<CustomizadorHandler,CustomizadorContainerInterfa
             AddText={() => TextEditorRef.current.showModal()}
             />
 
-            <S.DialogMain ref={CanvaDialogContainer}>
-                
-                
-                <FabricJSCanvas className="sample-canvas" onReady={onReady}/>
+            <S.DialogMain ref={BodyRef}>
               
+              <S.MockupContainer ref={CanvaDialogContainer}>
+                    <FabricJSCanvas className="sample-canvas" onReady={onReady}/>
+              </S.MockupContainer> 
+              
+              <S.MockupImg src='../../camera/mockup.png' alt='Camera'/> 
+              
+            
+                
             </S.DialogMain>
 
+        
             <StickersContainer ref={stickersModalRef} onClickSticker={onAddStickers}/>
             
           

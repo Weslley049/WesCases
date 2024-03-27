@@ -1,6 +1,6 @@
 
 import {fabric} from 'fabric'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { useFabricJSEditor } from 'fabricjs-react'
 import { TextEditorHandler } from './TextEditor';
@@ -11,7 +11,10 @@ export const UseCustomizador = () => {
 
       const TextEditorRef = useRef({} as TextEditorHandler);
 
-      const [caseBackground, setCaseBackground] = useState<any>();
+      const [_, setCaseBackground] = useState<any>({
+        path: '',
+        object: null,
+      });
       const [imageBackground, setImageBackground] = useState<any>();
       let isDragging = false 
 
@@ -21,14 +24,9 @@ export const UseCustomizador = () => {
       const CanvaDialogContainer = useRef(null);
    
       useEffect(() => {
-        if(editor){
-       
-
-                    
+        if(editor){  
           editor.canvas.setWidth((CanvaDialogContainer.current as any)?.clientWidth);
           editor.canvas.setHeight((CanvaDialogContainer.current as any)?.clientHeight);
-        
-
      
         }
       
@@ -60,14 +58,6 @@ export const UseCustomizador = () => {
         isDragging = false;
       });
 
-      useEffect(() => {
-       
-        if(caseBackground){
-          AddBackgroundImage(caseBackground);
-        }
-     
-      },[caseBackground])
-      
     //Functions
     const AddObjectCanva = () => {
       setObjectCanvasLength(ObjectCanvasLength + 1)
@@ -132,7 +122,6 @@ export const UseCustomizador = () => {
 
 
     const onAddImage = (file: File) => {
-
         if(imageBackground){
           editor?.canvas.remove(imageBackground);
           setImageBackground(null);
@@ -146,17 +135,26 @@ export const UseCustomizador = () => {
 
 
           image.onload = function () {
-            const scaleX = (editor as any)?.canvas.getWidth() /  image.width;
-            const scaleY = (editor as any)?.canvas.getHeight() / image.height;
-            const scale = Math.min(scaleX, scaleY);
-            
 
+  
+            const scaleX = (editor as any)?.canvas.getWidth() / (image as any).width;
+            const scaleY = (editor as any)?.canvas.getHeight() /(image as any).height;
+            const scale = Math.max(scaleX, scaleY);
+        
+            
+            
             const img = new fabric.Image(image, {
-                left: (editor as any)?.canvas.getWidth() / 2 - ( image.width * scale) / 2,
-                top: 0,
-                scaleX: scale,
-                scaleY: scale,
+              left: (editor as any)?.canvas.getWidth() / 2 - ((image as any).width * scale) / 2,
+              top: (editor as any)?.canvas.getHeight() / 2 - ((image as any).height * scale) / 2,
+              scaleX: scale,
+              scaleY: scale,
+              selectable: true,
+              evented: false,
+              lockMovementY: true,
+              lockRotation: true
             });
+
+            
 
             setImageBackground(img);
             
@@ -171,45 +169,31 @@ export const UseCustomizador = () => {
     } 
 
     const onAddStickers = (imagePath: string) => {
-      fabric.Image.fromURL(`../../${imagePath}`, function(oImg) {
+      fabric.Image.fromURL(`../../${imagePath}`, function(oImg: any) {  
         const scaleX = (editor as any)?.canvas.getWidth() / (oImg as any).width;
         const scaleY = (editor as any)?.canvas.getHeight() /(oImg as any).height;
         const scale = Math.min(scaleX, scaleY);
+    
         
-        oImg.set({ 
-            left: (editor as any)?.canvas.getWidth() / 2 - ((oImg as any).width * scale) / 2,
-            top: 0,
-            scaleX: scale,
-            scaleY: scale,
-           
+        oImg.set({
+          left: (editor as any)?.canvas.getWidth() / 2 - ((oImg as any).width * scale) / 2,
+          top: (editor as any)?.canvas.getHeight() / 2 - ((oImg as any).height * scale) / 2,
+          scaleX: scale,
+          scaleY: scale,
+          
         })
 
+    
+
         editor?.canvas.add(oImg);
+
+        editor?.canvas.bringForward(oImg);
       });
 
 
       AddObjectCanva()
     }
 
-    const AddBackgroundImage = useCallback((path: string) => {
-        
-        fabric.Image.fromURL(`../../${path}`, function(oImg) {
-          const scaleX = (editor as any)?.canvas.getWidth() / (oImg as any).width;
-          const scaleY = (editor as any)?.canvas.getHeight() /(oImg as any).height;
-          const scale = Math.min(scaleX, scaleY);
-          
-          oImg.set({ 
-              left: (editor as any)?.canvas.getWidth() / 2 - ((oImg as any).width * scale) / 2,
-              top: 0,
-              scaleX: scale,
-              scaleY: scale,
-              selectable: false,
-          })
-          editor?.canvas.add(oImg);
-        });  
-
-       
-    },[editor?.canvas])
 
     const handleRemoveObject = () => {
       const activeObject = editor?.canvas.getActiveObject();
@@ -239,7 +223,6 @@ export const UseCustomizador = () => {
         onAddImage,
         onAddStickers,
         handleRemoveObject,
-        AddBackgroundImage,
         onReady,
         CanvaDialogContainer,
         ObjectCanvasLength,

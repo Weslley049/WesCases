@@ -28,6 +28,7 @@ const GlobalStyle = createGlobalStyle`
 
 		html,
 		body {
+			
 			width: 100%;
             background: var(--gray-50);
 			min-height: 100vh;
