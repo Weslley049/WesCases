@@ -76,11 +76,11 @@ export const UseCustomizador = () => {
         isDragging = true
       });
       
-      editor?.canvas.on('mouse:up', function (event: any) {
+      editor?.canvas.on('mouse:up', function () {
         isDragging = false;
       });
 
-      editor?.canvas.on('mouse:down', function (event: any) {
+      editor?.canvas.on('mouse:down', function () {
      
       })
        
