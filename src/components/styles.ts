@@ -68,7 +68,8 @@ export const MockupImg = styled.img`
     position: absolute;
     top: 20%;
     left: 29.5%;
-    z-index: 1;
+    z-index: 3;
+     pointer-events: none; 
 
     @media (max-width: 430px) {
         height: 70%;

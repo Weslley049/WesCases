@@ -49,14 +49,45 @@ export const UseCustomizador = () => {
           
         }
       });
+      
+      editor?.canvas.on('object:moving', function(options: any) {
+        var obj = options.target;
+        var objWidth = obj.getScaledWidth();
+        var objHeight = obj.getScaledHeight();
+        var canvasWidth = Number(editor?.canvas.width);
+        var canvasHeight = Number(editor?.canvas.height);
+        
+      
+     
+          if (obj.left < 0 || obj.top < 0 || obj.left + objWidth > canvasWidth || obj.top + objHeight > canvasHeight) {
+            obj.setCoords(); 
+            var newLeft = Math.min(Math.max(obj.left, 0), canvasWidth - objWidth);
+            var newTop = Math.min(Math.max(obj.top, 0), canvasHeight - objHeight);
+            obj.set({ left: newLeft, top: newTop });
+          
+          }
+     
+
+     
+        
+    });
 
       editor?.canvas.on('mouse:move', function () {
         isDragging = true
       });
       
-      editor?.canvas.on('mouse:up', function () {
+      editor?.canvas.on('mouse:up', function (event: any) {
         isDragging = false;
       });
+
+      editor?.canvas.on('mouse:down', function (event: any) {
+     
+      })
+       
+      
+    
+
+
 
     //Functions
     const AddObjectCanva = () => {
@@ -93,6 +124,12 @@ export const UseCustomizador = () => {
 
       AddObjectCanva()
     };
+
+    const discardActiveObject = () => {
+      debugger;
+      editor?.canvas.discardActiveObject();
+      editor?.canvas.renderAll();
+    }
   
 
     const onAddText = (text: string,  options?: any) => {
@@ -151,7 +188,10 @@ export const UseCustomizador = () => {
               selectable: true,
               evented: false,
               lockMovementY: true,
-              lockRotation: true
+              lockRotation: true, 
+              lockScalingX: true, 
+             
+           
             });
 
             
@@ -159,6 +199,8 @@ export const UseCustomizador = () => {
             setImageBackground(img);
             
             editor?.canvas.add(img);
+
+            editor?.canvas.sendToBack(img);
           };
         };
        
@@ -184,10 +226,14 @@ export const UseCustomizador = () => {
         })
 
     
-
+      
         editor?.canvas.add(oImg);
+        
+        editor?.canvas.setActiveObject(oImg);
+      
 
-        editor?.canvas.bringForward(oImg);
+
+      
       });
 
 
@@ -221,6 +267,7 @@ export const UseCustomizador = () => {
         onAddText,
         onEditText,
         onAddImage,
+        discardActiveObject,
         onAddStickers,
         handleRemoveObject,
         onReady,
