@@ -28,6 +28,8 @@ export const UseCustomizador = () => {
           editor.canvas.setWidth((CanvaDialogContainer.current as any)?.clientWidth);
           editor.canvas.setHeight((CanvaDialogContainer.current as any)?.clientHeight);
      
+
+      
         }
       
       },[editor, CanvaDialogContainer.current])
@@ -51,18 +53,20 @@ export const UseCustomizador = () => {
       });
       
       editor?.canvas.on('object:moving', function(options: any) {
-        var obj = options.target;
-        var objWidth = obj.getScaledWidth();
-        var objHeight = obj.getScaledHeight();
-        var canvasWidth = Number(editor?.canvas.width);
-        var canvasHeight = Number(editor?.canvas.height);
+        const obj = options.target; 
+        
+        const objWidth = obj.getScaledWidth();
+        const objHeight = obj.getScaledHeight();
+       
+        const  canvasWidth = Number(editor?.canvas.width);
+        const  canvasHeight = Number(editor?.canvas.height);
         
       
      
           if (obj.left < 0 || obj.top < 0 || obj.left + objWidth > canvasWidth || obj.top + objHeight > canvasHeight) {
             obj.setCoords(); 
-            var newLeft = Math.min(Math.max(obj.left, 0), canvasWidth - objWidth);
-            var newTop = Math.min(Math.max(obj.top, 0), canvasHeight - objHeight);
+            const newLeft = Math.min(Math.max(obj.left, 0), canvasWidth - objWidth);
+            const newTop = Math.min(Math.max(obj.top, 0), canvasHeight - objHeight);
             obj.set({ left: newLeft, top: newTop });
           
           }
@@ -126,7 +130,6 @@ export const UseCustomizador = () => {
     };
 
     const discardActiveObject = () => {
-      debugger;
       editor?.canvas.discardActiveObject();
       editor?.canvas.renderAll();
     }
@@ -159,6 +162,9 @@ export const UseCustomizador = () => {
 
 
     const onAddImage = (file: File) => {
+      if(file){
+
+      
         if(imageBackground){
           editor?.canvas.remove(imageBackground);
           setImageBackground(null);
@@ -185,12 +191,12 @@ export const UseCustomizador = () => {
               top: (editor as any)?.canvas.getHeight() / 2 - ((image as any).height * scale) / 2,
               scaleX: scale,
               scaleY: scale,
-              selectable: true,
+              selectable: false,
               evented: false,
               lockMovementY: true,
               lockRotation: true, 
               lockScalingX: true, 
-             
+              lockScalingY:true,
            
             });
 
@@ -207,7 +213,7 @@ export const UseCustomizador = () => {
         reader.readAsDataURL(file);
 
         AddObjectCanva()
-       
+      }
     } 
 
     const onAddStickers = (imagePath: string) => {

@@ -89,7 +89,8 @@ const Customizador = forwardRef<CustomizadorHandler,CustomizadorContainerInterfa
               </S.MockupContainer> 
               
               <S.MockupImg src='../../camera/mockup.png' alt='Camera'/> 
-              
+
+          
             
                 
             </S.DialogMain>

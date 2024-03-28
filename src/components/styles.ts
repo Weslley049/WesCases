@@ -48,6 +48,7 @@ export const MockupContainer = styled.div`
     border-radius: 10%;
     z-index: 2;
     overflow: hidden;
+    background-color: var(--gray-200);
     
     @media (max-width: 430px) {
           position: absolute;
@@ -55,7 +56,6 @@ export const MockupContainer = styled.div`
           left: 31.5%;
           height: 62.5%;
           width: 39.5%;
-      
     }
     
 `;
@@ -69,7 +69,7 @@ export const MockupImg = styled.img`
     top: 20%;
     left: 29.5%;
     z-index: 3;
-     pointer-events: none; 
+    pointer-events: none; 
 
     @media (max-width: 430px) {
         height: 70%;
@@ -79,3 +79,22 @@ export const MockupImg = styled.img`
     }
 
 `;
+
+export const MockupCamera = styled.img`
+    height: 13%;
+    width: 13%;
+    position: absolute;
+    top: 26%;
+    left: 41.3%;
+    z-index: 3;
+    pointer-events: none; 
+
+    @media (max-width: 430px) {
+        height: 70%;
+        width: 90%;
+        top: 10%;
+        left: 5%;
+    }
+
+`;
+
