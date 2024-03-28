@@ -48,6 +48,8 @@ const Customizador = forwardRef<CustomizadorHandler,CustomizadorContainerInterfa
 
     const handleCapture = () => {
       if (BodyRef.current) {
+        rest.discardActiveObject();
+
         html2canvas(BodyRef.current, { scale: 2 }).then((canvas) => {
           const imgData = canvas.toDataURL('image/jpeg');
           const link = document.createElement('a');
